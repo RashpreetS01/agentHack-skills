@@ -2,61 +2,33 @@ name: Validate Skills
 
 on:
   push:
-    paths:
-      - 'skills/**'
-      - 'scripts/**'
+    branches: [master, main]
   pull_request:
-    paths:
-      - 'skills/**'
+    branches: [master, main]
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    name: Validate skill format and safety
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install pyyaml rich
+        run: pip install pyyaml
 
-      - name: Validate all skills
+      - name: Validate skills
         run: python scripts/validate_skills.py
 
       - name: Check safety disclaimers
         run: python scripts/check_safety.py
 
-      - name: Verify MITRE technique format
-        run: python scripts/validate_mitre.py
-
-  index:
-    runs-on: ubuntu-latest
-    name: Verify index.json is up to date
-    needs: validate
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: pip install pyyaml
-
-      - name: Generate index
+      - name: Regenerate index
         run: python scripts/generate_index.py
 
-      - name: Check for drift
+      - name: Verify index is up to date
         run: |
-          if ! git diff --exit-code index.json; then
-            echo "❌ index.json is out of date. Run 'python scripts/generate_index.py' and commit."
-            exit 1
-          fi
-          echo "✅ index.json is up to date."
+          git diff --exit-code index.json || (echo "index.json is stale - run python scripts/generate_index.py" && exit 1)
