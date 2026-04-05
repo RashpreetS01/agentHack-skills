@@ -1,16 +1,20 @@
 # AgentHack-Skills
 
+> **🎓 Live Cohort — April 14, 2026 · 15 seats · $149**
+> Learn ethical hacking with Claude Code in 2 weeks. All labs included. [**Enroll →**](https://rashpreets01.github.io/agentHack-skills/)
+
 <p align="center">
   <img src="assets/banner.png" alt="AgentHack-Skills Banner" width="800"/>
 </p>
 
 <p align="center">
-  <a href="https://github.com/mukul975/agentHack-skills/stargazers"><img src="https://img.shields.io/github/stars/mukul975/agentHack-skills?style=flat-square&color=gold" alt="Stars"/></a>
+  <a href="https://github.com/RashpreetS01/agentHack-skills/stargazers"><img src="https://img.shields.io/github/stars/RashpreetS01/agentHack-skills?style=flat-square&color=gold" alt="Stars"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square" alt="License"/></a>
-  <a href="https://github.com/mukul975/agentHack-skills/actions"><img src="https://img.shields.io/github/actions/workflow/status/mukul975/agentHack-skills/validate-skills.yml?label=skills%20valid&style=flat-square" alt="CI"/></a>
+  <a href="https://github.com/RashpreetS01/agentHack-skills/actions"><img src="https://img.shields.io/github/actions/workflow/status/RashpreetS01/agentHack-skills/validate-skills.yml?label=skills%20valid&style=flat-square" alt="CI"/></a>
   <a href="index.json"><img src="https://img.shields.io/badge/skills-15-brightgreen?style=flat-square" alt="Skills"/></a>
   <img src="https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-red?style=flat-square" alt="MITRE"/>
   <img src="https://img.shields.io/badge/Built%20with-Claude%20Code-orange?style=flat-square" alt="Built with Claude Code"/>
+  <a href="https://rashpreets01.github.io/agentHack-skills/"><img src="https://img.shields.io/badge/cohort-$149-green?style=flat-square" alt="Cohort"/></a>
 </p>
 
 <p align="center">
@@ -47,10 +51,10 @@ This project fills the gap that no other tool fills: **MIT-licensed, self-hostab
 
 ```bash
 # Install via npx (agentskills.io standard)
-npx skills add mukul975/agentHack-skills
+npx skills add RashpreetS01/agentHack-skills
 
 # Or clone directly
-git clone https://github.com/mukul975/agentHack-skills.git
+git clone https://github.com/RashpreetS01/agentHack-skills.git
 ```
 
 Skills are immediately available to Claude Code, Cursor, GitHub Copilot, LangChain, and any agentskills.io-compatible agent.
@@ -59,7 +63,7 @@ Skills are immediately available to Claude Code, Cursor, GitHub Copilot, LangCha
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/mukul975/agentHack-skills.git
+git clone https://github.com/RashpreetS01/agentHack-skills.git
 cd agentHack-skills
 
 # 2. Install the MCP server
@@ -173,7 +177,7 @@ This repo is a direct companion to [Anthropic-Cybersecurity-Skills](https://gith
 Install both:
 ```bash
 npx skills add mukul975/Anthropic-Cybersecurity-Skills
-npx skills add mukul975/agentHack-skills
+npx skills add RashpreetS01/agentHack-skills
 ```
 
 ---
@@ -240,10 +244,10 @@ Quick checklist:
 
 ```bibtex
 @software{agenthack_skills_2026,
-  author = {mukul975},
+  author = {RashpreetS01},
   title = {AgentHack-Skills: Ethical Hacking Skills for AI Agents},
   year = {2026},
-  url = {https://github.com/mukul975/agentHack-skills},
+  url = {https://github.com/RashpreetS01/agentHack-skills},
   license = {Apache-2.0}
 }
 ```
