@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethical Hacking with Claude — 2-Week Live Cohort</title>
+  <meta name="description" content="Learn ethical hacking with AI. 15 hands-on skills across SQLi, XSS, privesc, OSINT and more — all in isolated Docker labs, guided by Claude Code. Only 15 seats." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            green: {
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              900: '#14532d',
+              950: '#052e16',
+            },
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #22c55e 0%, #4ade80 50%, #86efac 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow-green {
+      box-shadow: 0 0 40px rgba(34, 197, 94, 0.25), 0 0 80px rgba(34, 197, 94, 0.1);
+    }
+    .glow-green-sm {
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+    }
+    .card-border {
+      border: 1px solid rgba(34, 197, 94, 0.12);
+      background: rgba(3, 7, 18, 0.8);
+    }
+    .card-border:hover {
+      border-color: rgba(34, 197, 94, 0.35);
+      background: rgba(5, 46, 22, 0.12);
+    }
+    .terminal-bg {
+      background: #0d1117;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .sticky-bar {
+      backdrop-filter: blur(12px);
+      background: rgba(3, 7, 18, 0.92);
+      border-bottom: 1px solid rgba(34, 197, 94, 0.08);
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary svg { transform: rotate(45deg); }
+    details summary svg { transition: transform 0.2s ease; }
+    html, body { background-color: #030712; }
+  </style>
+</head>
+<body class="bg-[#030712] text-gray-100 antialiased">
+
+  <!-- Sticky Nav -->
+  <div class="sticky-bar fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-green-500 font-mono text-sm font-bold">$ ./agentHack</span>
+        <span class="hidden sm:inline text-gray-600 text-sm">|</span>
+        <span class="hidden sm:inline text-gray-400 text-sm">Ethical Hacking with Claude</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-1.5">
+          <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse-slow"></div>
+          <span class="text-green-400 text-xs font-semibold uppercase tracking-wider">Cohort Open</span>
+        </div>
+        <a href="INSERT_GUMROAD_LINK" target="_blank" rel="noopener noreferrer"
+           class="bg-green-500 hover:bg-green-400 text-[#030712] font-bold text-sm px-4 py-2 rounded-lg transition-all duration-200 glow-green-sm">
+          Enroll — $149
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-24 px-4 overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.025]"
+         style="background-image: linear-gradient(rgba(34,197,94,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,1) 1px, transparent 1px); background-size: 60px 60px;">
+    </div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full opacity-[0.08] pointer-events-none"
+         style="background: radial-gradient(ellipse, #22c55e 0%, transparent 70%);">
+    </div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-green-950 border border-green-500/30 rounded-full px-4 py-1.5 mb-8">
+        <span class="text-green-400 text-xs font-mono font-semibold">LIVE COHORT &middot; APR 14, 2026</span>
+        <span class="w-1 h-1 bg-green-500 rounded-full"></span>
+        <span class="text-green-300 text-xs font-bold">15 SEATS ONLY</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.1] mb-6 tracking-tight">
+        Hack Like a Pro.<br/>
+        <span class="gradient-text">Let Claude Do the Heavy Lifting.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        A 2-week live cohort teaching real ethical hacking skills — SQLi, XSS, LFI, privesc, OSINT and 10 more — entirely inside safe, isolated Docker labs. No prior hacking experience needed.
+      </p>
+
+      <!-- Terminal -->
+      <div class="terminal-bg rounded-xl p-5 max-w-xl mx-auto mb-10 text-left glow-green-sm">
+        <div class="flex gap-1.5 mb-3">
+          <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+        </div>
+        <div class="font-mono text-sm space-y-1.5">
+          <p><span class="text-green-500">$</span> <span class="text-gray-300">claude run sqli-lab --target dvwa</span></p>
+          <p class="text-gray-600"># Analyzing injection surface...</p>
+          <p><span class="text-green-400">&#10003;</span> <span class="text-gray-300">Vulnerable param found: <span class="text-yellow-400">?id=1'</span></span></p>
+          <p><span class="text-green-400">&#10003;</span> <span class="text-gray-300">Payload crafted. Extracting schema...</span></p>
+          <p><span class="text-green-400">&#10003;</span> <span class="text-gray-300">Root credentials dumped.</span></p>
+          <p class="text-gray-600"># Lab completed in isolated container. No real systems touched.</p>
+          <p><span class="text-green-500">$</span> <span class="text-gray-400 animate-pulse">_</span></p>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="INSERT_GUMROAD_LINK" target="_blank" rel="noopener noreferrer"
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-[#030712] font-black text-lg px-8 py-4 rounded-xl transition-all duration-200 glow-green">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Claim Your Seat — $149
+        </a>
+        <a href="https://github.com/RashpreetS01/agentHack-skills" target="_blank" rel="noopener noreferrer"
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-gray-700 hover:border-green-500/50 text-gray-300 hover:text-green-400 font-semibold text-base px-6 py-4 rounded-xl transition-all duration-200">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub (4k+ stars)
+        </a>
+      </div>
+
+      <!-- Social proof strip -->
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-10 text-sm text-gray-500">
+        <span class="flex items-center gap-1.5"><span class="text-green-500 font-bold">4,000+</span> GitHub stars</span>
+        <span class="text-gray-800 hidden sm:inline">|</span>
+        <span class="flex items-center gap-1.5">Cohort starts <span class="text-gray-300 font-semibold">Apr 14</span></span>
+        <span class="text-gray-800 hidden sm:inline">|</span>
+        <span class="flex items-center gap-1.5">Isolated Docker labs</span>
+        <span class="text-gray-800 hidden sm:inline">|</span>
+        <span class="flex items-center gap-1.5">No prior exp. required</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You'll Learn -->
+  <section id="curriculum" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-green-500 font-mono text-sm uppercase tracking-widest">Curriculum</span>
+        <h2 class="text-3xl sm:text-4xl font-black mt-3 mb-4">15 Real-World Hacking Skills</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Every skill is practiced hands-on in an isolated lab. Claude Code guides your attack chains — explaining each step, generating payloads, and reviewing your approach.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">01</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">SQL Injection</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Classic and blind SQLi, schema extraction, and filter bypasses using Claude-generated payloads.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">02</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Cross-Site Scripting (XSS)</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Reflected, stored, and DOM-based XSS. Cookie theft and filter bypass strategies.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">03</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Local File Inclusion (LFI)</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Path traversal, log poisoning, and PHP wrapper abuse to read sensitive server files.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">04</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">SSRF Attacks</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Server-Side Request Forgery to pivot to internal services and cloud metadata endpoints.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">05</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">JWT Security</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Algorithm confusion, none-alg bypass, weak secret bruteforce, and token forging.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">06</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">SUID / Sudo Privesc</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Linux privilege escalation via misconfigured SUID binaries, sudo rules, and GTFOBins.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">07</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Hash Cracking</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">MD5, SHA1, bcrypt — dictionary attacks, rule-based cracking, and hashcat workflows.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">08</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Port Scanning</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Nmap mastery — service detection, OS fingerprinting, stealth scans, and scripted enumeration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">09</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Packet Capture</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Wireshark and tcpdump — credential sniffing, protocol inspection, and traffic replay.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">10</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">OSINT</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Open-source intelligence — subdomain enumeration, email harvesting, recon automation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">11</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Password Spraying</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Low-and-slow credential attacks against web apps and SSH with rate-limit evasion techniques.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">12</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Deserialization Attacks</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Insecure deserialization in Java and PHP — gadget chains and RCE via manipulated objects.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">13</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">HTTP Header Attacks</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Host header injection, cache poisoning, CORS misconfigurations, and header analysis.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">14</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">Directory Enumeration</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Gobuster, ffuf, and dirsearch — uncover hidden endpoints, admin panels, and backup files.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-border rounded-xl p-5 transition-all duration-200 group sm:col-span-2 lg:col-span-1">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-green-950 border border-green-500/20 flex items-center justify-center flex-shrink-0 group-hover:border-green-500/40 transition-colors">
+              <span class="text-green-400 font-mono text-xs font-bold">15</span>
+            </div>
+            <div>
+              <h3 class="font-bold text-white mb-1">AI-Assisted Recon</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Use Claude Code as your offensive AI co-pilot — automate recon, generate scripts, and chain vulnerabilities.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Safety disclaimer -->
+      <div class="mt-8 flex items-start gap-3 bg-gray-900/40 border border-gray-800 rounded-xl p-5">
+        <div class="text-green-500 mt-0.5 flex-shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          <span class="text-white font-semibold">Safety guarantee:</span> All labs run in isolated Docker containers with no internet access. Every attack targets intentionally vulnerable systems built for education. No real infrastructure is ever touched. Educational use only.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-24 px-4 bg-gray-900/20">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-green-500 font-mono text-sm uppercase tracking-widest">Structure</span>
+        <h2 class="text-3xl sm:text-4xl font-black mt-3 mb-4">How the Cohort Works</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Two focused weeks. Live sessions. Real attacks in real lab environments — with Claude Code as your AI co-pilot the entire way through.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+        <!-- Week 1 -->
+        <div class="card-border rounded-2xl p-8 transition-all duration-200">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-1.5 flex-shrink-0">
+              <span class="text-green-400 font-mono text-sm font-bold">WEEK 01</span>
+            </div>
+            <h3 class="text-xl font-black text-white">Web Application Attacks</h3>
+          </div>
+          <p class="text-gray-400 text-sm mb-6 leading-relaxed">5 live sessions. Deep dives into web app vulnerabilities using DVWA, Juice Shop, and custom lab targets — with Claude Code generating and explaining every payload.</p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              SQLi, XSS, LFI — full exploitation chains
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              SSRF, JWT attacks, HTTP header abuse
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              Directory enumeration + deserialization
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              AI-driven recon and automated scanning
+            </li>
+          </ul>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="card-border rounded-2xl p-8 transition-all duration-200">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-1.5 flex-shrink-0">
+              <span class="text-green-400 font-mono text-sm font-bold">WEEK 02</span>
+            </div>
+            <h3 class="text-xl font-black text-white">Network + Privilege Escalation</h3>
+          </div>
+          <p class="text-gray-400 text-sm mb-6 leading-relaxed">5 live sessions. Network-layer attacks, credential attacks, and getting root on hardened Linux targets using real privesc techniques.</p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              Port scanning, packet capture, OSINT
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              Password spraying + hash cracking
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              Linux privesc via SUID and sudo abuse
+            </li>
+            <li class="flex items-center gap-3 text-sm text-gray-300">
+              <span class="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></span>
+              CTF-style final challenge with feedback
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Support features -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-gray-700 transition-colors duration-200">
+          <div class="w-12 h-12 bg-green-950 border border-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          </div>
+          <h4 class="font-bold text-white mb-2">Daily Discord Support</h4>
+          <p class="text-gray-500 text-sm">Ask questions, share progress, and get unblocked fast. RS is active daily in the cohort channel.</p>
+        </div>
+        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-gray-700 transition-colors duration-200">
+          <div class="w-12 h-12 bg-green-950 border border-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h4 class="font-bold text-white mb-2">AI Agent-Driven Labs</h4>
+          <p class="text-gray-500 text-sm">Claude Code runs alongside you — explaining attacks, suggesting next steps, reviewing your approach.</p>
+        </div>
+        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center hover:border-gray-700 transition-colors duration-200">
+          <div class="w-12 h-12 bg-green-950 border border-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <h4 class="font-bold text-white mb-2">Isolated Docker Labs</h4>
+          <p class="text-gray-500 text-sm">Spin up complete attack environments in seconds. Works on Mac, Windows, and Linux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructor -->
+  <section id="instructor" class="py-24 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-green-500 font-mono text-sm uppercase tracking-widest">Instructor</span>
+        <h2 class="text-3xl sm:text-4xl font-black mt-3">Built by Someone Who Ships</h2>
+      </div>
+      <div class="card-border rounded-2xl p-8 sm:p-12 transition-all duration-200">
+        <div class="flex flex-col sm:flex-row items-start gap-8">
+          <div class="flex-shrink-0">
+            <div class="w-24 h-24 rounded-2xl bg-green-950 border-2 border-green-500/40 flex items-center justify-center glow-green-sm">
+              <span class="text-green-400 font-black text-3xl font-mono">RS</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-1">
+              <h3 class="text-2xl sm:text-3xl font-black text-white">Rishabh (RS)</h3>
+              <a href="https://github.com/RashpreetS01/agentHack-skills" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-green-500/40 rounded-full px-3 py-1 text-xs text-gray-300 hover:text-green-400 transition-all duration-200">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                4,000+ stars
+              </a>
+            </div>
+            <p class="text-green-400 font-mono text-sm mb-6">AI Creator &middot; Security Researcher &middot; Maintainer of Anthropic-Cybersecurity-Skills</p>
+            <div class="space-y-4 text-gray-400 text-base leading-relaxed">
+              <p>I built and maintain <span class="text-white font-semibold">Anthropic-Cybersecurity-Skills</span> — one of the fastest-growing open-source security education projects on GitHub, now at 4,000+ stars. The entire repo was built using Claude Code as the primary development tool.</p>
+              <p>This cohort is the live, hands-on version of that curriculum. You get the skills, the labs, the AI tooling, and direct access to me — all in two focused weeks.</p>
+              <p>I'm an AI-native creator who builds in public. When I teach something, it's because I've shipped it — not just read about it.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-6">
+              <span class="bg-green-950/60 border border-green-500/20 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full">Claude Code</span>
+              <span class="bg-green-950/60 border border-green-500/20 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full">Offensive Security</span>
+              <span class="bg-green-950/60 border border-green-500/20 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full">Docker Labs</span>
+              <span class="bg-green-950/60 border border-green-500/20 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full">Open Source</span>
+              <span class="bg-green-950/60 border border-green-500/20 text-green-400 text-xs font-semibold px-3 py-1.5 rounded-full">AI-Native</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 px-4 bg-gray-900/20">
+    <div class="max-w-xl mx-auto text-center">
+      <span class="text-green-500 font-mono text-sm uppercase tracking-widest">Pricing</span>
+      <h2 class="text-3xl sm:text-4xl font-black mt-3 mb-4">Join the Cohort</h2>
+      <p class="text-gray-400 mb-10">One-time payment. Lifetime access to recordings and the private Discord community.</p>
+
+      <div class="card-border rounded-2xl p-8 sm:p-10 glow-green text-left">
+
+        <!-- Scarcity -->
+        <div class="bg-green-950/50 border border-green-500/25 rounded-xl p-4 mb-8 flex items-start gap-3">
+          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse-slow flex-shrink-0 mt-1.5"></div>
+          <div>
+            <p class="text-green-300 font-bold text-sm">Only 15 seats available.</p>
+            <p class="text-green-500/70 text-xs mt-0.5">Cohort starts April 14, 2026. Once it's full, registration closes — no exceptions.</p>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="flex items-end gap-4 mb-2">
+          <span class="text-6xl font-black text-white">$149</span>
+          <div class="pb-2">
+            <span class="text-2xl text-gray-600 line-through">$299</span>
+            <p class="text-green-400 text-sm font-bold">50% launch discount</p>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-8">One-time &middot; No subscription &middot; Includes everything below</p>
+
+        <!-- Includes -->
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            10 live sessions across 2 weeks
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            15 hands-on isolated Docker labs
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            Claude Code lab scripts and attack prompts
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            Private Discord (cohort + alumni access)
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            Lifetime access to all session recordings
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            CTF-style final challenge with personal feedback
+          </li>
+          <li class="flex items-center gap-3 text-gray-300 text-sm">
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            Direct async access to RS throughout cohort
+          </li>
+        </ul>
+
+        <a href="INSERT_GUMROAD_LINK" target="_blank" rel="noopener noreferrer"
+           class="block w-full text-center bg-green-500 hover:bg-green-400 text-[#030712] font-black text-lg py-4 rounded-xl transition-all duration-200 glow-green">
+          Claim Your Seat — $149
+        </a>
+        <p class="text-center text-gray-700 text-xs mt-4">Secure checkout via Gumroad &middot; Instant access to pre-cohort setup guide</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-green-500 font-mono text-sm uppercase tracking-widest">FAQ</span>
+        <h2 class="text-3xl sm:text-4xl font-black mt-3">Common Questions</h2>
+      </div>
+
+      <div class="space-y-3">
+
+        <details class="card-border rounded-xl" open>
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none">
+            <span class="font-bold text-white text-base pr-6">Is this legal? Will I get in trouble?</span>
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed text-sm border-t border-gray-800/60 pt-4">
+            100% legal. Every attack in this cohort is executed against intentionally vulnerable Docker containers running locally on your own machine. We never touch real systems, external servers, or production infrastructure. The labs are designed specifically for education — the same approach used by OWASP, PortSwigger Web Academy, and every major security training platform in the world.
+          </div>
+        </details>
+
+        <details class="card-border rounded-xl">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none">
+            <span class="font-bold text-white text-base pr-6">Do I need prior hacking or security experience?</span>
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed text-sm border-t border-gray-800/60 pt-4">
+            No prior hacking experience required. You should be comfortable using a terminal and have basic programming knowledge (any language). The cohort is built for developers, software engineers, and curious technologists who want to understand how attacks work — not career hackers. Claude Code fills knowledge gaps in real time during every lab.
+          </div>
+        </details>
+
+        <details class="card-border rounded-xl">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none">
+            <span class="font-bold text-white text-base pr-6">What do I need installed on my machine?</span>
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed text-sm border-t border-gray-800/60 pt-4">
+            Docker Desktop (free), Claude Code (free tier works), and a terminal. That's it. Supports macOS, Windows, and Linux. No Kali VM, no VirtualBox, no complex setup required. A full setup guide is sent immediately after purchase.
+          </div>
+        </details>
+
+        <details class="card-border rounded-xl">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none select-none">
+            <span class="font-bold text-white text-base pr-6">What if I miss a live session?</span>
+            <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          </summary>
+          <div class="px-6 pb-6 text-gray-400 leading-relaxed text-sm border-t border-gray-800/60 pt-4">
+            Every session is recorded and shared within 24 hours. You get lifetime access to all recordings. The labs are self-contained so you can work through them at your own pace. Discord support continues for alumni after the cohort ends.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-28 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div class="w-[700px] h-[350px] rounded-full opacity-[0.07]"
+           style="background: radial-gradient(ellipse, #22c55e 0%, transparent 70%);">
+      </div>
+    </div>
+    <div class="absolute inset-0 opacity-[0.015]"
+         style="background-image: linear-gradient(rgba(34,197,94,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,197,94,1) 1px, transparent 1px); background-size: 60px 60px;">
+    </div>
+
+    <div class="relative max-w-3xl mx-auto text-center">
+      <span class="text-green-500 font-mono text-sm uppercase tracking-widest">Last Chance</span>
+      <h2 class="text-3xl sm:text-5xl font-black mt-4 mb-6 leading-tight">
+        15 Seats.<br/>
+        <span class="gradient-text">Cohort Starts April 14.</span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-xl mx-auto mb-10">
+        Learn how real attacks work. Build the instincts to defend against them. Do it in two weeks — with AI.
+      </p>
+      <a href="INSERT_GUMROAD_LINK" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-400 text-[#030712] font-black text-xl px-10 py-5 rounded-2xl transition-all duration-200 glow-green">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Claim Your Seat — $149
+      </a>
+      <p class="text-gray-600 text-sm mt-5">
+        <span class="line-through text-gray-700">$299</span> &nbsp;&mdash;&nbsp; 50% launch price &nbsp;&middot;&nbsp; Secure checkout via Gumroad
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-16 pt-12 border-t border-gray-800/50">
+        <div class="text-center">
+          <p class="text-3xl font-black text-green-400">15</p>
+          <p class="text-gray-500 text-sm mt-1">Max Seats</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-black text-green-400">2</p>
+          <p class="text-gray-500 text-sm mt-1">Focused Weeks</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-black text-green-400">15</p>
+          <p class="text-gray-500 text-sm mt-1">Hacking Skills</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-black text-green-400">4k+</p>
+          <p class="text-gray-500 text-sm mt-1">GitHub Stars</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 px-4 border-t border-gray-900/80">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-green-500 font-mono text-sm font-bold">$ ./agentHack-skills</span>
+        <span class="text-gray-700 text-sm">&mdash; by RS</span>
+      </div>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="https://github.com/RashpreetS01/agentHack-skills" target="_blank" rel="noopener noreferrer"
+           class="text-gray-600 hover:text-green-400 transition-colors duration-200 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <span class="text-gray-800">|</span>
+        <span class="text-gray-700">Educational use only</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
