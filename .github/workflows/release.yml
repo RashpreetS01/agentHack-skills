@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml build twine
+
+      - name: Generate fresh index.json
+        run: python scripts/generate_index.py
+
+      - name: Generate MITRE navigator layer
+        run: python scripts/generate_mitre_layer.py
+
+      - name: Count skills
+        id: count
+        run: |
+          count=$(find skills -name "SKILL.md" | wc -l | tr -d ' ')
+          echo "skill_count=$count" >> $GITHUB_OUTPUT
+
+      - name: Build MCP server package
+        run: |
+          cd mcp-server
+          python -m build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## AgentHack-Skills ${{ github.ref_name }}
+
+            **${{ steps.count.outputs.skill_count }} ethical hacking skills** for AI agents and students.
+
+            ⚠️ **Educational use only** — all labs are isolated Docker sandboxes.
+
+            ### Install
+            ```bash
+            npx skills add mukul975/agentHack-skills
+
+            # MCP server
+            pip install agentlab==${{ github.ref_name }}
+            ```
+
+            ### What's New
+            See the full changelog below.
+
+            ---
+            Built with [Claude Code](https://claude.ai/code)
+          files: |
+            index.json
+            mcp-server/dist/*

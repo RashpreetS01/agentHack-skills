@@ -1,0 +1,27 @@
+{
+  "id": "suid-lab",
+  "name": "SUID Misconfiguration Privilege Escalation",
+  "description": "Start as a low-privileged user on a Linux system. Enumerate SUID binaries, identify misconfigurations using GTFOBins techniques, and escalate to root to capture the flag in /root/flag.txt.",
+  "difficulty": "intermediate",
+  "category": "privilege-escalation",
+  "timeout_minutes": 60,
+  "skill_ref": "skills/detecting-suid-misconfigurations-for-privesc/SKILL.md",
+  "tags": ["suid", "privesc", "linux", "gtfobins", "intermediate"],
+  "flags": [
+    {
+      "id": "suid-root-flag",
+      "hash": "7c4a8d09ca3762af61e59520943dc26494f8941b",
+      "points": 150,
+      "hint": "Run: find / -perm -u=s -type f 2>/dev/null — then check GTFOBins for each result you don't recognize as necessary."
+    }
+  ],
+  "learning_objectives": [
+    "Understand what the SUID permission bit does and why it exists",
+    "Enumerate all SUID binaries using the find command",
+    "Distinguish between legitimate SUID binaries and misconfigurations",
+    "Use GTFOBins to find exploitation techniques for specific binaries",
+    "Escalate from www-data to root using a SUID binary",
+    "Understand how to correctly remediate SUID misconfigurations",
+    "Explain the principle of least privilege in the context of file permissions"
+  ]
+}

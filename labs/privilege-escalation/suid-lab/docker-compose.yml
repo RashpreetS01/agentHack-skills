@@ -1,0 +1,40 @@
+---
+# AgentHack-Skills — SUID Misconfiguration Privilege Escalation Lab
+#
+# ⚠️  EDUCATIONAL USE ONLY — Isolated internal network, no internet access
+#
+# Architecture:
+#   target: Ubuntu system with intentional SUID misconfigurations
+#   (no attacker container needed — you enter the target as a low-priv user)
+
+name: agentlab-suid-lab
+
+services:
+  target:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: suid-target
+    networks:
+      lab_net:
+        aliases:
+          - target
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+    security_opt:
+      - no-new-privileges:false   # Must be false for SUID to work in the lab
+    restart: unless-stopped
+
+networks:
+  lab_net:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24

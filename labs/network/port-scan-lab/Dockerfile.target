@@ -1,0 +1,50 @@
+# AgentHack-Skills — Port Scan Lab Target
+# ⚠️ Educational Use Only — Multiple services running on various ports
+
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    nginx \
+    openssh-server \
+    netcat-traditional \
+    python3 \
+    vsftpd \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configure nginx (port 80)
+RUN echo "server { listen 80; location / { return 200 'AgentHack-Skills Target - Port 80'; } }" \
+    > /etc/nginx/sites-available/default
+
+# Configure SSH (port 22)
+RUN mkdir /run/sshd && \
+    echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config && \
+    useradd -m labuser && echo "labuser:labpass" | chpasswd
+
+# Hidden service on non-standard port (students must find this)
+RUN echo "FLAG{hidden_service_found}" > /opt/secret_flag.txt
+
+# Start script
+RUN cat > /start.sh << 'EOF'
+#!/bin/bash
+service nginx start
+service ssh start
+# Hidden flag service on port 31337
+while true; do cat /opt/secret_flag.txt | nc -l -p 31337; done &
+# SNMP simulation on 161
+python3 -c "
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.bind(('0.0.0.0', 161))
+while True:
+    data, addr = s.recvfrom(1024)
+    s.sendto(b'SNMP-community-public', addr)
+" &
+tail -f /dev/null
+EOF
+RUN chmod +x /start.sh
+
+EXPOSE 22 80 161/udp 31337
+
+CMD ["/start.sh"]

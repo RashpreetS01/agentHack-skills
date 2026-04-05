@@ -1,0 +1,96 @@
+---
+# AgentHack-Skills — SQL Injection Basics Lab
+#
+# ⚠️  EDUCATIONAL USE ONLY
+# This lab runs on an isolated internal Docker network.
+# No internet access. No host filesystem access.
+# Containers are automatically removed when stopped.
+#
+# Usage:
+#   agentlab start sqli-basics
+#   OR: docker compose up -d
+
+name: agentlab-sqli-basics
+
+services:
+  target:
+    image: ghcr.io/digininja/dvwa:latest
+    container_name: sqli-target
+    environment:
+      DB_SERVER: db
+      DB_USER: dvwa
+      DB_PASSWORD: p@ssw0rd
+      DB_DATABASE: dvwa
+      RECAPTCHA_PRIV_KEY: ""
+      RECAPTCHA_PUB_KEY: ""
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      lab_net:
+        aliases:
+          - target
+    restart: unless-stopped
+    read_only: false
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+
+  db:
+    image: mariadb:10.11
+    container_name: sqli-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: dvwa
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: p@ssw0rd
+    networks:
+      - lab_net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - sqli_db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/99-flags.sql:ro
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+    security_opt:
+      - no-new-privileges:true
+
+  attacker:
+    image: kalilinux/kali-rolling:latest
+    container_name: sqli-attacker
+    command: bash -c "apt-get update -qq && apt-get install -y -qq nmap sqlmap ffuf curl netcat-traditional 2>/dev/null && tail -f /dev/null"
+    networks:
+      lab_net:
+        aliases:
+          - attacker
+    depends_on:
+      - target
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_RAW
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  lab_net:
+    driver: bridge
+    internal: true   # ← NO INTERNET ACCESS — safety guarantee
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+volumes:
+  sqli_db_data:
+    driver: local

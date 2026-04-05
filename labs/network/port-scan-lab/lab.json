@@ -1,0 +1,33 @@
+{
+  "id": "port-scan-lab",
+  "name": "Port Scanning & Network Reconnaissance",
+  "description": "Use Nmap to perform comprehensive port scanning against an isolated target. Discover open services, identify versions, and find a hidden service on a non-standard port. Also includes a simulated DNS server for OSINT/zone-transfer practice.",
+  "difficulty": "beginner",
+  "category": "network",
+  "timeout_minutes": 45,
+  "skill_ref": "skills/performing-port-scanning-in-safe-lab/SKILL.md",
+  "tags": ["nmap", "network-recon", "port-scanning", "beginner", "service-enumeration"],
+  "flags": [
+    {
+      "id": "hidden-service-flag",
+      "hash": "9a3bf28c6d4e1f7a5b8c2d9e3f0a4b7c1d5e8f2a6b9c3d7e1f4a8b2c5d9e3f6a",
+      "points": 100,
+      "hint": "The target has services on the standard ports (22, 80) BUT also on a non-standard port. Scan ALL 65535 ports: nmap -p- --min-rate=1000 target"
+    },
+    {
+      "id": "dns-zone-transfer-flag",
+      "hash": "b4c7d1e4f7a0b3c6d9e2f5a8b1c4d7e0f3a6b9c2d5e8f1a4b7c0d3e6f9a2b5c8",
+      "points": 100,
+      "hint": "Try a DNS zone transfer against the lab's DNS server: dig axfr acme-corp.lab @172.22.0.10"
+    }
+  ],
+  "learning_objectives": [
+    "Perform basic TCP connect and SYN port scans with Nmap",
+    "Scan all 65535 ports efficiently using --min-rate",
+    "Use Nmap service version detection (-sV) to identify running software",
+    "Understand port states: open, closed, filtered",
+    "Find hidden services on non-standard ports",
+    "Perform a DNS zone transfer to enumerate all subdomains",
+    "Read and interpret Nmap XML/text output"
+  ]
+}

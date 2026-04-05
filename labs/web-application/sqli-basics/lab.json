@@ -1,0 +1,39 @@
+{
+  "id": "sqli-basics",
+  "name": "SQL Injection Basics",
+  "description": "Detect and exploit SQL injection vulnerabilities in a deliberately vulnerable web application (DVWA). Practice error-based, boolean-based, and UNION-based SQLi techniques in a fully isolated Docker environment.",
+  "difficulty": "beginner",
+  "category": "web-application",
+  "timeout_minutes": 60,
+  "skill_ref": "skills/detecting-sql-injection-vulnerabilities/SKILL.md",
+  "tags": ["sqli", "owasp", "beginner", "web", "dvwa"],
+  "flags": [
+    {
+      "id": "sqli-flag-1",
+      "hash": "e3d6a3a5c2a4b3e8f1d9c7b5a2e4f6d8c1b3e5a7d9c2b4e6f8d1c3b5e7a9c2b4",
+      "points": 100,
+      "hint": "The flag is in a table called 'flags'. Use a UNION SELECT to extract it from the id parameter on the product listing page."
+    },
+    {
+      "id": "hidden-dir-flag",
+      "hash": "f4e7a2c9d1b8e5f3a6c0d7b2e9f1a4c6d8b0e3f5a7c9d2b4e6f8a1c3d5b7e9a2",
+      "points": 100,
+      "hint": "Use ffuf or gobuster to enumerate hidden directories. The target has a non-standard path that isn't linked anywhere."
+    },
+    {
+      "id": "server-header-flag",
+      "hash": "a2b4c6d8e1f3a5b7c9d0e2f4a6b8c1d3e5f7a9b2c4d6e8f1a3b5c7d9e2f4a6b8",
+      "points": 100,
+      "hint": "Check the Server response header. The version number is the key. Look up the CVE for that exact Apache version."
+    }
+  ],
+  "learning_objectives": [
+    "Identify SQL injection-vulnerable input fields using single quote tests",
+    "Extract data using UNION-based SQL injection",
+    "Understand the difference between error-based, boolean-based, and time-based blind SQLi",
+    "Use sqlmap to automate SQLi detection and exploitation",
+    "Perform web directory enumeration using ffuf",
+    "Identify information disclosure via HTTP response headers",
+    "Understand parameterized queries as the correct remediation"
+  ]
+}
