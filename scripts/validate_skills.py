@@ -95,12 +95,12 @@ def main() -> int:
             skill_count += 1
 
     if all_errors:
-        print(f"❌ Validation failed ({len(all_errors)} error(s) in {skill_count} skills):\n")
+        print(f"[FAIL] Validation failed ({len(all_errors)} error(s) in {skill_count} skills):\n")
         for err in all_errors:
             print(f"  • {err}")
         return 1
     else:
-        print(f"✅ All {skill_count} skills valid.")
+        print(f"[OK] All {skill_count} skills valid.")
         return 0
 
 

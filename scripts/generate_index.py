@@ -2,7 +2,7 @@
 """
 Generate index.json from all skills in the skills/ directory.
 
-⚠️  Run this whenever you add a new skill:
+[WARN]  Run this whenever you add a new skill:
     python scripts/generate_index.py
 
 The index.json enables fast scanning by AI agents without loading all SKILL.md files.
@@ -13,23 +13,48 @@ import re
 from datetime import UTC, datetime
 from pathlib import Path
 
+try:
+    import yaml
+    USE_YAML = True
+except ImportError:
+    USE_YAML = False
+
 REPO_ROOT = Path(__file__).parent.parent
 SKILLS_DIR = REPO_ROOT / "skills"
 INDEX_FILE = REPO_ROOT / "index.json"
 
-FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
+FRONTMATTER_RE = re.compile(r"^---\r?\n(.*?)\r?\n---", re.DOTALL)
 
 
 def parse_frontmatter(text: str) -> dict:
-    """Parse YAML frontmatter without a YAML dependency."""
     match = FRONTMATTER_RE.match(text)
     if not match:
         return {}
+    raw = match.group(1)
+    if USE_YAML:
+        return yaml.safe_load(raw) or {}
+    # Fallback: handle >- multi-line scalars manually
     result = {}
-    for line in match.group(1).splitlines():
+    lines = raw.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
         if ":" in line and not line.startswith(" "):
             key, _, val = line.partition(":")
-            result[key.strip()] = val.strip().strip('"').strip("'")
+            key = key.strip()
+            val = val.strip()
+            if val in (">-", ">", "|", "|-"):
+                # Collect indented continuation lines
+                parts = []
+                i += 1
+                while i < len(lines) and (lines[i].startswith(" ") or lines[i].startswith("\t")):
+                    parts.append(lines[i].strip())
+                    i += 1
+                result[key] = " ".join(parts)
+                continue
+            result[key] = val.strip('"').strip("'")
+        i += 1
+    return result
     return result
 
 
@@ -42,7 +67,7 @@ def main() -> None:
         text = skill_md.read_text(encoding="utf-8")
         fm = parse_frontmatter(text)
         if not fm.get("name"):
-            print(f"  ⚠️  Skipping {skill_dir.name}: no name in frontmatter")
+            print(f"  [WARN]  Skipping {skill_dir.name}: no name in frontmatter")
             continue
         skills.append(
             {
@@ -51,11 +76,10 @@ def main() -> None:
                 "domain": fm.get("domain", "cybersecurity"),
                 "subdomain": fm.get("subdomain", ""),
                 "difficulty": fm.get("difficulty", "beginner"),
-                "mitre_techniques": [
-                    t.strip().strip("[]").strip()
-                    for t in fm.get("mitre_techniques", "").split(",")
-                    if t.strip()
-                ],
+                "mitre_techniques": (
+                    fm["mitre_techniques"] if isinstance(fm.get("mitre_techniques"), list)
+                    else [t.strip() for t in str(fm.get("mitre_techniques", "")).split(",") if t.strip()]
+                ),
                 "path": f"skills/{skill_dir.name}",
             }
         )
@@ -73,7 +97,7 @@ def main() -> None:
     }
 
     INDEX_FILE.write_text(json.dumps(index, indent=2), encoding="utf-8")
-    print(f"✅ Generated index.json with {len(skills)} skills")
+    print(f"[OK] Generated index.json with {len(skills)} skills")
 
 
 if __name__ == "__main__":

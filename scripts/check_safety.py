@@ -38,11 +38,11 @@ def main() -> int:
             all_errors.extend(check_skill(skill_dir))
 
     if all_errors:
-        print(f"❌ Safety check failed:\n")
+        print(f"[FAIL] Safety check failed:\n")
         for err in all_errors:
             print(f"  • {err}")
         return 1
-    print(f"✅ Safety check passed — all skills contain required disclaimers.")
+    print(f"[OK] Safety check passed — all skills contain required disclaimers.")
     return 0
 
 

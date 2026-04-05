@@ -1,74 +1,94 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-04-05T00:00:00+00:00",
+  "generated_at": "2026-04-05T06:56:18.191127+00:00",
   "repository": "https://github.com/mukul975/agentHack-skills",
   "companion_repo": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
   "domain": "cybersecurity",
   "focus": "ethical-hacking-education",
   "total_skills": 15,
-  "safety_notice": "ALL skills and labs are for educational use in isolated environments only. Never use on unauthorized systems.",
+  "safety_notice": "ALL skills and labs are for educational use in isolated environments only.",
   "skills": [
     {
       "name": "analyzing-jwt-token-security",
-      "description": "Analyze JSON Web Tokens (JWTs) for common security vulnerabilities including algorithm confusion attacks (RS256 to HS256), none algorithm bypass, weak secret brute-forcing, and claim manipulation.",
+      "description": "Analyze JSON Web Tokens (JWTs) for common security vulnerabilities including algorithm confusion attacks (RS256 to HS256), none algorithm bypass, weak secret brute-forcing, and claim manipulation. Practice in isolated lab environments to understand authentication bypass and privilege escalation via token forgery.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1552.001", "T1190", "T1078"],
+      "mitre_techniques": [
+        "T1552.001",
+        "T1190",
+        "T1078"
+      ],
       "path": "skills/analyzing-jwt-token-security"
     },
     {
       "name": "analyzing-network-packet-captures",
-      "description": "Analyze PCAP files and live network captures using Wireshark and tshark to extract credentials, reconstruct HTTP sessions, identify malicious traffic patterns, and detect protocol anomalies in isolated lab environments.",
+      "description": "Analyze PCAP files and live network captures using Wireshark and tshark to extract credentials, reconstruct HTTP sessions, identify malicious traffic patterns, and detect protocol anomalies in isolated lab environments. Core network forensics and traffic analysis skill for security professionals.",
       "domain": "cybersecurity",
       "subdomain": "network-reconnaissance",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1040", "T1557"],
+      "mitre_techniques": [
+        "T1040",
+        "T1557"
+      ],
       "path": "skills/analyzing-network-packet-captures"
     },
     {
       "name": "analyzing-sudo-rules-for-privesc-vectors",
-      "description": "Enumerate and exploit sudo misconfigurations on Linux systems to escalate privileges. Covers NOPASSWD entries, wildcard abuse, sudo -l enumeration, LD_PRELOAD injection, and GTFOBins lookup for allowed commands.",
+      "description": "Enumerate and exploit sudo misconfigurations on Linux systems to escalate privileges. Covers NOPASSWD entries, wildcard abuse, sudo -l enumeration, LD_PRELOAD injection, and GTFOBins lookup for allowed commands in isolated lab environments. Core skill for Linux privilege escalation phases.",
       "domain": "cybersecurity",
       "subdomain": "privilege-escalation",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1548.003"],
+      "mitre_techniques": [
+        "T1548.003"
+      ],
       "path": "skills/analyzing-sudo-rules-for-privesc-vectors"
     },
     {
       "name": "analyzing-web-application-http-headers",
-      "description": "Analyze HTTP response headers for security misconfigurations including missing Content Security Policy, HSTS, X-Frame-Options, and information disclosure via Server/X-Powered-By headers.",
+      "description": "Analyze HTTP response headers for security misconfigurations including missing Content Security Policy, HSTS, X-Frame-Options, and information disclosure via Server/X-Powered-By headers. Covers manual inspection and automated scanning to identify header-based vulnerabilities and recommend remediations.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1190", "T1592.002"],
+      "mitre_techniques": [
+        "T1190",
+        "T1592.002"
+      ],
       "path": "skills/analyzing-web-application-http-headers"
     },
     {
       "name": "cracking-weak-hashes-in-lab-environment",
-      "description": "Identify and crack weak password hashes (MD5, SHA1, NTLM, bcrypt) using dictionary attacks, rainbow tables, and rule-based mutations with Hashcat and John the Ripper inside an isolated lab environment.",
+      "description": "Identify and crack weak password hashes (MD5, SHA1, NTLM, bcrypt) using dictionary attacks, rainbow tables, and rule-based mutations with Hashcat and John the Ripper inside an isolated lab environment. Covers hash identification, wordlist selection, and password policy auditing for security assessments.",
       "domain": "cybersecurity",
       "subdomain": "cryptography",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1110.002"],
+      "mitre_techniques": [
+        "T1110.002"
+      ],
       "path": "skills/cracking-weak-hashes-in-lab-environment"
     },
     {
       "name": "detecting-insecure-deserialization-vulnerabilities",
-      "description": "Detect insecure deserialization vulnerabilities in Java, Python (pickle), and PHP applications that allow remote code execution through crafted serialized objects. Covers gadget chain identification and ysoserial tool usage.",
+      "description": "Detect insecure deserialization vulnerabilities in Java, Python (pickle), and PHP applications that allow remote code execution through crafted serialized objects. Covers gadget chain identification, ysoserial tool usage, and detection techniques in isolated lab environments. OWASP A08:2021.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "advanced",
-      "mitre_techniques": ["T1190", "T1059"],
+      "mitre_techniques": [
+        "T1190",
+        "T1059"
+      ],
       "path": "skills/detecting-insecure-deserialization-vulnerabilities"
     },
     {
       "name": "detecting-lfi-path-traversal-vulnerabilities",
-      "description": "Detect Local File Inclusion (LFI) and path traversal vulnerabilities in web applications that allow reading arbitrary files from the server. Covers manual payload testing, encoding bypasses, log poisoning for RCE, and PHP wrapper techniques.",
+      "description": "Detect Local File Inclusion (LFI) and path traversal vulnerabilities in web applications that allow reading arbitrary files from the server. Covers manual payload testing, encoding bypasses, log poisoning for RCE, and PHP wrapper techniques in isolated Docker lab environments.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1190", "T1083"],
+      "mitre_techniques": [
+        "T1190",
+        "T1083"
+      ],
       "path": "skills/detecting-lfi-path-traversal-vulnerabilities"
     },
     {
@@ -77,70 +97,92 @@
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1190"],
+      "mitre_techniques": [
+        "T1190"
+      ],
       "path": "skills/detecting-sql-injection-vulnerabilities"
     },
     {
       "name": "detecting-ssrf-vulnerabilities",
-      "description": "Detect Server-Side Request Forgery (SSRF) vulnerabilities that allow attackers to make the server issue HTTP requests to internal or external resources. Covers cloud metadata endpoint access, blind SSRF, and filter bypass techniques.",
+      "description": "Detect Server-Side Request Forgery (SSRF) vulnerabilities that allow attackers to make the server issue HTTP requests to internal or external resources. Covers basic SSRF detection, cloud metadata endpoint access, blind SSRF via out-of-band channels, and filter bypass techniques in safe lab environments.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1190", "T1590.004"],
+      "mitre_techniques": [
+        "T1190",
+        "T1590.004"
+      ],
       "path": "skills/detecting-ssrf-vulnerabilities"
     },
     {
       "name": "detecting-suid-misconfigurations-for-privesc",
-      "description": "Identify SUID binary misconfigurations on Linux systems that allow unprivileged users to escalate to root. Covers manual enumeration, GTFOBins technique lookup, and exploitation in isolated lab environments.",
+      "description": "Identify SUID (Set User ID) binary misconfigurations on Linux systems that allow unprivileged users to escalate to root. Covers manual enumeration, GTFOBins technique lookup, and exploitation in isolated lab environments. Essential skill for Linux privilege escalation during penetration testing engagements.",
       "domain": "cybersecurity",
       "subdomain": "privilege-escalation",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1548.001"],
+      "mitre_techniques": [
+        "T1548.001"
+      ],
       "path": "skills/detecting-suid-misconfigurations-for-privesc"
     },
     {
       "name": "detecting-xss-vulnerabilities-in-web-apps",
-      "description": "Detect reflected, stored, and DOM-based Cross-Site Scripting (XSS) vulnerabilities in web applications using manual payloads and browser-based analysis inside isolated lab environments.",
+      "description": "Detect reflected, stored, and DOM-based Cross-Site Scripting (XSS) vulnerabilities in web applications using manual payloads and browser-based analysis inside isolated lab environments. Covers OWASP A03 injection and sanitization bypass.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1190", "T1059.007"],
+      "mitre_techniques": [
+        "T1190",
+        "T1059.007"
+      ],
       "path": "skills/detecting-xss-vulnerabilities-in-web-apps"
     },
     {
       "name": "performing-osint-recon-on-simulated-target",
-      "description": "Conduct Open Source Intelligence (OSINT) reconnaissance on a simulated target organization using public information sources, DNS enumeration, certificate transparency logs, and Google dorks.",
+      "description": "Conduct Open Source Intelligence (OSINT) reconnaissance on a simulated target organization using public information sources, DNS enumeration, certificate transparency logs, and Google dorks. All reconnaissance is performed against a fully simulated, consent-given lab target with no real personal data involved.",
       "domain": "cybersecurity",
       "subdomain": "osint-reconnaissance",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1589", "T1590", "T1591", "T1596"],
+      "mitre_techniques": [
+        "T1589",
+        "T1590",
+        "T1591",
+        "T1596"
+      ],
       "path": "skills/performing-osint-recon-on-simulated-target"
     },
     {
       "name": "performing-password-spray-in-lab",
-      "description": "Execute controlled password spray attacks against simulated authentication services in isolated lab environments to understand how attackers test large numbers of accounts with a small set of common passwords.",
+      "description": "Execute controlled password spray attacks against simulated authentication services in isolated lab environments to understand how attackers test large numbers of accounts with a small set of common passwords. Covers SSH, web login, and API endpoint spraying with rate-limit awareness and detection evasion understanding for defensive security purposes.",
       "domain": "cybersecurity",
       "subdomain": "credential-access",
       "difficulty": "intermediate",
-      "mitre_techniques": ["T1110.003"],
+      "mitre_techniques": [
+        "T1110.003"
+      ],
       "path": "skills/performing-password-spray-in-lab"
     },
     {
       "name": "performing-port-scanning-in-safe-lab",
-      "description": "Perform TCP and UDP port scanning against isolated lab targets using Nmap to discover open services, identify running software versions, and enumerate the attack surface inside controlled Docker lab environments.",
+      "description": "Perform TCP and UDP port scanning against isolated lab targets using Nmap to discover open services, identify running software versions, and enumerate the attack surface. Covers SYN scans, version detection, and OS fingerprinting techniques exclusively in controlled Docker lab environments.",
       "domain": "cybersecurity",
       "subdomain": "network-reconnaissance",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1046", "T1595.001"],
+      "mitre_techniques": [
+        "T1046",
+        "T1595.001"
+      ],
       "path": "skills/performing-port-scanning-in-safe-lab"
     },
     {
       "name": "performing-web-directory-enumeration",
-      "description": "Discover hidden directories, files, and endpoints on web servers using wordlist-based fuzzing with tools like ffuf, gobuster, and dirb inside isolated lab environments.",
+      "description": "Discover hidden directories, files, and endpoints on web servers using wordlist-based fuzzing with tools like ffuf, gobuster, and dirb inside isolated lab environments. Covers recursive enumeration, extension fuzzing, virtual host discovery, and filtering strategies for reducing noise in results.",
       "domain": "cybersecurity",
       "subdomain": "web-application-testing",
       "difficulty": "beginner",
-      "mitre_techniques": ["T1595.003"],
+      "mitre_techniques": [
+        "T1595.003"
+      ],
       "path": "skills/performing-web-directory-enumeration"
     }
   ]
