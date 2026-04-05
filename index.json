@@ -1,13 +1,24 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-04-05T06:56:18.191127+00:00",
+  "generated_at": "2026-04-05T07:35:41.659946+00:00",
   "repository": "https://github.com/mukul975/agentHack-skills",
   "companion_repo": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
   "domain": "cybersecurity",
   "focus": "ethical-hacking-education",
-  "total_skills": 15,
+  "total_skills": 20,
   "safety_notice": "ALL skills and labs are for educational use in isolated environments only.",
   "skills": [
+    {
+      "name": "analyzing-cron-job-privesc-vectors",
+      "description": "Identify and exploit Linux cron job misconfigurations to escalate privileges from a low-privilege user to root. Covers writable cron scripts, world-writable PATH entries, wildcard injection, and cron-based reverse shells in isolated lab environments.",
+      "domain": "cybersecurity",
+      "subdomain": "privilege-escalation",
+      "difficulty": "intermediate",
+      "mitre_techniques": [
+        "T1053.003"
+      ],
+      "path": "skills/analyzing-cron-job-privesc-vectors"
+    },
     {
       "name": "analyzing-jwt-token-security",
       "description": "Analyze JSON Web Tokens (JWTs) for common security vulnerabilities including algorithm confusion attacks (RS256 to HS256), none algorithm bypass, weak secret brute-forcing, and claim manipulation. Practice in isolated lab environments to understand authentication bypass and privilege escalation via token forgery.",
@@ -138,6 +149,40 @@
       "path": "skills/detecting-xss-vulnerabilities-in-web-apps"
     },
     {
+      "name": "exploiting-command-injection-vulnerabilities",
+      "description": "Identify and exploit OS command injection vulnerabilities in web applications where user-supplied input is passed unsanitized to a shell command. Covers in-band, blind, and out-of-band command injection techniques against deliberately vulnerable targets in isolated lab environments.",
+      "domain": "cybersecurity",
+      "subdomain": "web-application-testing",
+      "difficulty": "intermediate",
+      "mitre_techniques": [
+        "T1059",
+        "T1190"
+      ],
+      "path": "skills/exploiting-command-injection-vulnerabilities"
+    },
+    {
+      "name": "performing-arp-spoofing-in-lab",
+      "description": "Perform ARP spoofing and man-in-the-middle (MITM) attacks within isolated LAN environments using arpspoof and ettercap to intercept traffic between two hosts. Covers ARP cache poisoning, traffic forwarding, and credential sniffing in a controlled Docker lab network.",
+      "domain": "cybersecurity",
+      "subdomain": "lateral-movement",
+      "difficulty": "intermediate",
+      "mitre_techniques": [
+        "T1557.002"
+      ],
+      "path": "skills/performing-arp-spoofing-in-lab"
+    },
+    {
+      "name": "performing-dns-zone-transfer-attacks",
+      "description": "Enumerate DNS infrastructure by requesting full zone transfers (AXFR) from misconfigured authoritative DNS servers using dig, nslookup, and fierce. Covers zone transfer mechanics, subdomain harvesting, and identifying exposed internal hostnames in isolated lab environments.",
+      "domain": "cybersecurity",
+      "subdomain": "network-reconnaissance",
+      "difficulty": "beginner",
+      "mitre_techniques": [
+        "T1590.002"
+      ],
+      "path": "skills/performing-dns-zone-transfer-attacks"
+    },
+    {
       "name": "performing-osint-recon-on-simulated-target",
       "description": "Conduct Open Source Intelligence (OSINT) reconnaissance on a simulated target organization using public information sources, DNS enumeration, certificate transparency logs, and Google dorks. All reconnaissance is performed against a fully simulated, consent-given lab target with no real personal data involved.",
       "domain": "cybersecurity",
@@ -173,6 +218,18 @@
         "T1595.001"
       ],
       "path": "skills/performing-port-scanning-in-safe-lab"
+    },
+    {
+      "name": "performing-smb-enumeration-in-lab",
+      "description": "Enumerate SMB shares, users, and sessions on Windows and Linux targets using smbclient and enum4linux within isolated lab environments. Covers null session attacks, share listing, file retrieval, and user enumeration against misconfigured Samba and Windows SMB services.",
+      "domain": "cybersecurity",
+      "subdomain": "network-reconnaissance",
+      "difficulty": "beginner",
+      "mitre_techniques": [
+        "T1135",
+        "T1046"
+      ],
+      "path": "skills/performing-smb-enumeration-in-lab"
     },
     {
       "name": "performing-web-directory-enumeration",
