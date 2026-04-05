@@ -11,7 +11,7 @@
   <a href="https://github.com/RashpreetS01/agentHack-skills/stargazers"><img src="https://img.shields.io/github/stars/RashpreetS01/agentHack-skills?style=flat-square&color=gold" alt="Stars"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square" alt="License"/></a>
   <a href="https://github.com/RashpreetS01/agentHack-skills/actions"><img src="https://img.shields.io/github/actions/workflow/status/RashpreetS01/agentHack-skills/validate-skills.yml?label=skills%20valid&style=flat-square" alt="CI"/></a>
-  <a href="index.json"><img src="https://img.shields.io/badge/skills-15-brightgreen?style=flat-square" alt="Skills"/></a>
+  <a href="index.json"><img src="https://img.shields.io/badge/skills-20-brightgreen?style=flat-square" alt="Skills"/></a>
   <img src="https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-red?style=flat-square" alt="MITRE"/>
   <img src="https://img.shields.io/badge/Built%20with-Claude%20Code-orange?style=flat-square" alt="Built with Claude Code"/>
   <a href="https://rashpreets01.github.io/agentHack-skills/"><img src="https://img.shields.io/badge/cohort-$149-green?style=flat-square" alt="Cohort"/></a>
